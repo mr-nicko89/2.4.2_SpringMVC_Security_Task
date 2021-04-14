@@ -1,5 +1,6 @@
 package my.app.controllers;
 
+import my.app.dao.JpaUserDAO;
 import my.app.dao.PersonDAO;
 import my.app.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,10 @@ import javax.validation.Valid;
 @RequestMapping("/people")
 public class PeopleController {
 
-    private final PersonDAO personDAO;
+    private final JpaUserDAO personDAO;
 
     @Autowired
-    public PeopleController(PersonDAO personDAO) {
+    public PeopleController(JpaUserDAO personDAO) {
         this.personDAO = personDAO;
     }
 
