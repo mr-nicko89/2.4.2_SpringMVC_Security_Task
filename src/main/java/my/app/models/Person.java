@@ -1,12 +1,18 @@
 package my.app.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 
+@Entity
+@Table(name = "PEOPLE")
 public class Person {
+    @Id
     private int id;
 
     @NotEmpty(message = "Name should not be empty")
