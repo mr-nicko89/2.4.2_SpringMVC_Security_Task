@@ -2,6 +2,8 @@ package my.app.dao;
 
 import my.app.models.Person;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,14 +11,16 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
+//@Repository
 @Component
-@Transactional()
+//@Transactional(readOnly = true)
 public class JpaPersonDAOImp implements PersonDAO{
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
     public List<Person> index() {
+//        return entityManager.createQuery("select person from Person person", Person.class
         return entityManager.createQuery("select person from Person person", Person.class
         ).getResultList();
     }
@@ -31,7 +35,7 @@ public class JpaPersonDAOImp implements PersonDAO{
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public void save(Person person) {
         entityManager.persist(person);
 

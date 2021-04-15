@@ -9,6 +9,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 import javax.sql.DataSource;
 
 
@@ -16,7 +18,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = "my.app.config")
-//@EnableJpaRepositories("my.app.config")
+@EnableJpaRepositories("my.app.config")
 public class DataBaseConfig {
 
 
