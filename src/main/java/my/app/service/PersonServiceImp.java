@@ -1,5 +1,6 @@
 package my.app.service;
 
+import my.app.dao.JpaPersonDAOImp;
 import my.app.dao.PersonDAO;
 import my.app.dao.PersonDAOImp;
 import my.app.models.Person;
@@ -14,7 +15,7 @@ import java.util.List;
 public class PersonServiceImp implements PersonService {
 
     @Autowired
-    private PersonDAOImp personDao;
+    private JpaPersonDAOImp personDao;
 
     @Override
     public List<Person> index() {

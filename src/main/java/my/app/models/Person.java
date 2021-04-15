@@ -1,9 +1,6 @@
 package my.app.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -14,6 +11,8 @@ import javax.validation.constraints.Size;
 @Table(name = "people")
 public class Person {
     @Id
+    @GeneratedValue
+    @Column(name = "id")
     private int id;
 
     @NotEmpty(message = "Name should not be empty")

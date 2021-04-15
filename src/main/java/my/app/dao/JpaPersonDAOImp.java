@@ -11,7 +11,8 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
-//@Repository
+import javax.persistence.Entity;
+
 @Component
 //@Transactional(readOnly = true)
 public class JpaPersonDAOImp implements PersonDAO{
@@ -20,8 +21,8 @@ public class JpaPersonDAOImp implements PersonDAO{
 
     @Override
     public List<Person> index() {
-//        return entityManager.createQuery("select person from Person person", Person.class
         return entityManager.createQuery("select person from Person person", Person.class
+//        return entityManager.createQuery("Select id from Person", Person.class
         ).getResultList();
     }
 
