@@ -8,14 +8,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import javax.persistence.Entity;
 
 
 @Repository
-@Transactional
+@Transactional(readOnly = true)
 public class PersonDAOImp implements PersonDAO{
     @PersistenceContext
     private EntityManager entityManager;
@@ -37,7 +38,7 @@ public class PersonDAOImp implements PersonDAO{
     }
 
     @Override
-//    @Transactional
+    @Transactional
     public void save(Person person) {
         entityManager.persist(person);
 
