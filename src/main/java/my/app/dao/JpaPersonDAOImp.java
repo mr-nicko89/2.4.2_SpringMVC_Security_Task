@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 @Transactional()
-public class JpaUserDAO implements PersonDAOImp{
+public class JpaPersonDAOImp implements PersonDAO{
     @PersistenceContext
     private EntityManager entityManager;
 
