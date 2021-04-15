@@ -1,10 +1,10 @@
 package my.app.service;
 
-import my.app.dao.JpaPersonDAOImp;
 import my.app.dao.PersonDAO;
 import my.app.dao.PersonDAOImp;
 import my.app.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,8 +14,10 @@ import java.util.List;
 @Transactional
 public class PersonServiceImp implements PersonService {
 
+
+    @Qualifier("personDAOImp")
     @Autowired
-    private JpaPersonDAOImp personDao;
+    private PersonDAO personDao;
 
     @Override
     public List<Person> index() {

@@ -2,53 +2,55 @@ package my.app.dao;
 
 import my.app.models.Person;
 import org.springframework.stereotype.Component;
-import my.app.models.Person;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
+import javax.persistence.Entity;
 
-@Component
-public class PersonDAOImp implements PersonDAO {
-    private static int PEOPLE_COUNT;
-    private List<Person> people;
 
-    {
-        people = new ArrayList<>();
-
-        people.add(new Person(++PEOPLE_COUNT, "Tom", 24, "tom@mail.ru"));
-        people.add(new Person(++PEOPLE_COUNT, "Bob", 52, "bob@mail.ru"));
-        people.add(new Person(++PEOPLE_COUNT, "Mike", 18, "mike@yahoo.com"));
-        people.add(new Person(++PEOPLE_COUNT, "Katy", 34, "katy@gmail.com"));
-    }
+@Repository
+@Transactional
+public class PersonDAOImp implements PersonDAO{
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public List<Person> index() {
-        return people;
+        return entityManager.createQuery("select person from Person person", Person.class
+//        return entityManager.createQuery("Select id from Person", Person.class
+        ).getResultList();
     }
 
     @Override
     public Person show(int id) {
-        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+        TypedQuery<Person> q = entityManager.createQuery(
+                "select person from Person person where person.id = :id", Person.class
+        );
+        q.setParameter("id",id);
+        return q.getResultList().stream().findAny().orElse(null);
     }
 
     @Override
+//    @Transactional
     public void save(Person person) {
-        person.setId(++PEOPLE_COUNT);
-        people.add(person);
+        entityManager.persist(person);
+
     }
 
     @Override
     public void update(int id, Person updatedPerson) {
-        Person personToBeUpdated = show(id);
 
-        personToBeUpdated.setName(updatedPerson.getName());
-        personToBeUpdated.setAge(updatedPerson.getAge());
-        personToBeUpdated.setEmail(updatedPerson.getEmail());
     }
 
     @Override
     public void delete(int id) {
-        people.removeIf(p -> p.getId() == id);
+
     }
 }
+
