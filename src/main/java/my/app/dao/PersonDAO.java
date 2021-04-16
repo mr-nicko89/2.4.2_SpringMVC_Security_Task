@@ -5,14 +5,14 @@ import my.app.models.Person;
 import java.util.List;
 
 public interface PersonDAO {
-    List<Person> index();
+    List<Person> listAllPeople();
 
-    Person show(int id);
+    Person getUserById(int id);
 
     void save(Person person);
 
     void update(int id, Person updatedPerson);
 
-    public void delete(int id);
+    void delete(int id);
 }
 

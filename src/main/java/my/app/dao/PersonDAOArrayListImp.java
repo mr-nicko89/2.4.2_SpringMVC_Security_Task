@@ -2,7 +2,6 @@ package my.app.dao;
 
 import my.app.models.Person;
 import org.springframework.stereotype.Component;
-import my.app.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +22,12 @@ public class PersonDAOArrayListImp implements PersonDAO {
     }
 
     @Override
-    public List<Person> index() {
+    public List<Person> listAllPeople() {
         return people;
     }
 
     @Override
-    public Person show(int id) {
+    public Person getUserById(int id) {
         return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
     }
 
@@ -40,7 +39,7 @@ public class PersonDAOArrayListImp implements PersonDAO {
 
     @Override
     public void update(int id, Person updatedPerson) {
-        Person personToBeUpdated = show(id);
+        Person personToBeUpdated = getUserById(id);
 
         personToBeUpdated.setName(updatedPerson.getName());
         personToBeUpdated.setAge(updatedPerson.getAge());

@@ -49,7 +49,7 @@ public class DataBaseConfig {
                 new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setDataSource(dataSource());
-        factory.setPackagesToScan("my.app.config");
+        factory.setPackagesToScan(new String[]{"my.app.models"});
         return factory;
     }
 

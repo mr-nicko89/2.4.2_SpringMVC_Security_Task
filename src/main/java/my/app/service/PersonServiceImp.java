@@ -1,7 +1,6 @@
 package my.app.service;
 
 import my.app.dao.PersonDAO;
-import my.app.dao.PersonDAOImp;
 import my.app.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,12 +21,12 @@ public class PersonServiceImp implements PersonService {
 
     @Override
     public List<Person> index() {
-        return personDao.index();
+        return personDao.listAllPeople();
     }
 
     @Override
     public Person show(int id) {
-        return personDao.show(id);
+        return personDao.getUserById(id);
     }
 
     @Override

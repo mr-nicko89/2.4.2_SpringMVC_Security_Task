@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -20,18 +19,14 @@ public class PersonDAOImp implements PersonDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-
-
     @Override
-    public List<Person> index() {
-
-        List<Person> lPerson = entityManager.createQuery("from Person", Person.class
+    public List<Person> listAllPeople() {
+        return entityManager.createQuery("from Person", Person.class
         ).getResultList();
-        return lPerson;
     }
 
     @Override
-    public Person show(int id) {
+    public Person getUserById(int id) {
         TypedQuery<Person> q = entityManager.createQuery(
                 "select person from Person person where person.id = :id", Person.class
         );
@@ -48,12 +43,12 @@ public class PersonDAOImp implements PersonDAO {
 
     @Override
     public void update(int id, Person updatedPerson) {
-
+        entityManager.merge(updatedPerson);
     }
 
     @Override
     public void delete(int id) {
-
+        entityManager.remove(getUserById(id));
     }
 }
 
