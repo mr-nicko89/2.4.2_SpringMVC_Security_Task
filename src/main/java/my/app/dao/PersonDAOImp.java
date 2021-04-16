@@ -1,31 +1,33 @@
 package my.app.dao;
 
 import my.app.models.Person;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-//import javax.transaction.Transactional;
-import org.springframework.transaction.annotation.Transactional;
-import java.util.List;
 
-import javax.persistence.Entity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Repository
 @Transactional(readOnly = true)
-public class PersonDAOImp implements PersonDAO{
+
+public class PersonDAOImp implements PersonDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+
     @Override
     public List<Person> index() {
-        return entityManager.createQuery("select person from Person person", Person.class
-//        return entityManager.createQuery("Select id from Person", Person.class
+
+        List<Person> lPerson = entityManager.createQuery("from Person", Person.class
         ).getResultList();
+        return lPerson;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class PersonDAOImp implements PersonDAO{
         TypedQuery<Person> q = entityManager.createQuery(
                 "select person from Person person where person.id = :id", Person.class
         );
-        q.setParameter("id",id);
+        q.setParameter("id", id);
         return q.getResultList().stream().findAny().orElse(null);
     }
 

@@ -1,7 +1,9 @@
 package my.app.config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -11,15 +13,19 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 
-
 @Configuration
+@EnableJpaRepositories("my.app.config")
 @EnableTransactionManagement
 @ComponentScan(basePackages = "my.app.config")
-@EnableJpaRepositories("my.app.config")
+
 public class DataBaseConfig {
+
+     @Resource
+     private Environment env;
 
 
     @Bean
