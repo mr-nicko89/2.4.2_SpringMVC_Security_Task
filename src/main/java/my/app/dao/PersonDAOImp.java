@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @Repository
-@Transactional(readOnly = true)
+
 
 public class PersonDAOImp implements PersonDAO {
     @PersistenceContext
@@ -35,7 +35,6 @@ public class PersonDAOImp implements PersonDAO {
     }
 
     @Override
-    @Transactional
     public void save(Person person) {
         entityManager.persist(person);
 

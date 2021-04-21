@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class PersonServiceImp implements PersonService {
 
 
@@ -30,6 +30,7 @@ public class PersonServiceImp implements PersonService {
     }
 
     @Override
+    @Transactional
     public void save(Person person) {
         personDao.save(person);
     }
