@@ -1,6 +1,5 @@
 package my.app.controllers;
 
-import my.app.dao.*;
 import my.app.models.Person;
 import my.app.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 
-@RestController
+@Controller
 @RequestMapping("/people")
 public class PeopleController {
 
