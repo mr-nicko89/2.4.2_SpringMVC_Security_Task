@@ -9,7 +9,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/people").authenticated() // в /edit могут заходить только зарегистрированные пользователи
+                .antMatchers("/people/authenticated**").authenticated()
+//                .antMatchers("/people").authenticated() // в /edit могут заходить только зарегистрированные пользователи
 //                .antMatchers("/admin").hasAnyRole("ADMIN","SUPERADMIN") // в /admin могут заходить только пользователи с ролями ADMIN и SUPERADMIN
                 .and()
 //                .httpBasic() или formLogin //httpBasic - при заходе неаутентифицированным пользователем перебросит на стандартную форму аутентификации
@@ -19,4 +20,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/");
 
     }
+
 }

@@ -45,9 +45,9 @@ public class DataBaseConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(true);
-        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
-        vendorAdapter.setShowSql(true);
+        vendorAdapter.setGenerateDdl(Boolean.parseBoolean(env.getProperty("hibernate.hbm2ddl.auto")));
+        vendorAdapter.setDatabasePlatform(env.getProperty("hibernate.dialect"));
+        vendorAdapter.setShowSql(Boolean.parseBoolean(env.getProperty("hibernate.show_sql")));
         LocalContainerEntityManagerFactoryBean factory =
                 new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);

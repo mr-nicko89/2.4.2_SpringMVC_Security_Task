@@ -72,4 +72,10 @@ public class PeopleController {
         personService.delete(id);
         return "redirect:/people";
     }
+
+//    Example
+    @GetMapping("/authenticated")
+    public String pageForAuthenticatedUsers(){
+        return "people/authenticated";
+    }
 }
