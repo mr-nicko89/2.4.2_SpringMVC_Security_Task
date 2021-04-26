@@ -7,7 +7,7 @@ import java.util.List;
 public interface PersonService {
     List<Person> index();
 
-    Person show(int id);
+    Person getUserById(int id);
 
     void save(Person person);
 

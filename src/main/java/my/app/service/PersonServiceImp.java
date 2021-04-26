@@ -25,7 +25,7 @@ public class PersonServiceImp implements PersonService {
     }
 
     @Override
-    public Person show(int id) {
+    public Person getUserById(int id) {
         return personDao.getUserById(id);
     }
 
@@ -43,4 +43,5 @@ public class PersonServiceImp implements PersonService {
     public void delete(int id) {
         personDao.delete(id);
     }
+
 }

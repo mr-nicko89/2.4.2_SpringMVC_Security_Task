@@ -49,5 +49,6 @@ public class PersonDAOImp implements PersonDAO {
     public void delete(int id) {
         entityManager.remove(getUserById(id));
     }
+
 }
 
