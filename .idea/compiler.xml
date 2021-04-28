@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="2.3.1_create_CRUD_application" target="1.8" />
+      <module name="2.3.1_create_CRUD_application" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
