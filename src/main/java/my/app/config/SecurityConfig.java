@@ -52,9 +52,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
+                .antMatchers("/hello").permitAll()
+
                 // защищенные URL
-                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+                .antMatchers("/people").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+
+
+
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
