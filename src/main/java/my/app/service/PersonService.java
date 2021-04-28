@@ -5,7 +5,7 @@ import my.app.models.Person;
 import java.util.List;
 
 public interface PersonService {
-    List<Person> index();
+    List<Person> getAll();
 
     Person getUserById(int id);
 

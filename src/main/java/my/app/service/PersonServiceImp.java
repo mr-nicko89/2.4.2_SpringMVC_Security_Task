@@ -20,7 +20,7 @@ public class PersonServiceImp implements PersonService {
     private PersonDAO personDao;
 
     @Override
-    public List<Person> index() {
+    public List<Person> getAll() {
         return personDao.listAllPeople();
     }
 
