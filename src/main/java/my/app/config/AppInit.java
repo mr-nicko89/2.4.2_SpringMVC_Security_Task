@@ -10,19 +10,23 @@ import javax.servlet.ServletException;
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class<?>[]{
+                WebConfig.class
+        };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
+
         return new Class[]{WebConfig.class};
     }
 
     @Override
     protected String[] getServletMappings() {
+
         return new String[]{"/"};
     }
-
+//TO DO * То что ниже нет в 2.4.2_Example
     @Override
     public void onStartup(ServletContext aServletContext) throws ServletException {
         super.onStartup(aServletContext);
