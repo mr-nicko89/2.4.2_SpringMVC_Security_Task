@@ -1,11 +1,10 @@
 package my.app.config;
 
 import my.app.config.handler.LoginSuccessHandler;
-import my.app.models.Permission;
 import my.app.models.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -20,6 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //Аутентификация inMemory
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Override
@@ -67,9 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole(Role.ADMIN.name())
 //                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole(Role.ADMIN.name())
 //Доступ на основе permission
-                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.PERSON_READ.getPermission())
-                .antMatchers(HttpMethod.POST, "/people/**").hasAuthority(Permission.PERSON_WRITE.getPermission())
-                .antMatchers(HttpMethod.DELETE, "/people/**").hasAuthority(Permission.PERSON_WRITE.getPermission())
+//                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.PERSON_READ.getPermission())
+//                .antMatchers(HttpMethod.POST, "/people/**").hasAuthority(Permission.PERSON_WRITE.getPermission())
+//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAuthority(Permission.PERSON_WRITE.getPermission())
 
                 .anyRequest()
                 .authenticated();
