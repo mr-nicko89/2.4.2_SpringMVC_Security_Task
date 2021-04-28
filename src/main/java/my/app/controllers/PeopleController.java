@@ -41,7 +41,7 @@ public class PeopleController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String loginPage() {
+    public String getLoginPage() {
         return "login";
     }
 
