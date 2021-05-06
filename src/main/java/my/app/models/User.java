@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Table(name = "people")
-public class Person {
+public class User {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -30,11 +30,11 @@ public class Person {
     @Column(name = "email")
     private String email;
 
-    public Person() {
+    public User() {
 
     }
 
-    public Person(int id, String name, int age, String email) {
+    public User(int id, String name, int age, String email) {
         this.id = id;
         this.name = name;
         this.age = age;

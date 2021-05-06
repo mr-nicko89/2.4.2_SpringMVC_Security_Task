@@ -67,9 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole(Role.ADMIN.name())
 //                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole(Role.ADMIN.name())
 //Доступ на основе permission
-                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.PERSON_READ.getPermission())
-                .antMatchers(HttpMethod.POST, "/people/**").hasAuthority(Permission.PERSON_WRITE.getPermission())
-                .antMatchers(HttpMethod.DELETE, "/people/**").hasAuthority(Permission.PERSON_WRITE.getPermission())
+                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.USER_READ.getPermission())
+                .antMatchers(HttpMethod.POST, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
+                .antMatchers(HttpMethod.DELETE, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
 
                 .anyRequest()
                 .authenticated();

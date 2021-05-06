@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="2.3.1_create_CRUD_application" />
+        <module name="2.4.2_SpringMVC_Security_Task" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="2.3.1_create_CRUD_application" target="9" />
+      <module name="2.3.1_create_CRUD_application" target="1.8" />
+      <module name="2.4.2_SpringMVC_Security_Task" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>

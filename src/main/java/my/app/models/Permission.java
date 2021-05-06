@@ -1,8 +1,8 @@
 package my.app.models;
 
 public enum Permission {
-    PERSON_READ("person:read"),
-    PERSON_WRITE("person:write");
+    USER_READ("user:read"),
+    USER_WRITE("user:write");
 
     private final String permission;
 

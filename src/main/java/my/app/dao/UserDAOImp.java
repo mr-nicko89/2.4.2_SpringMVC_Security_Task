@@ -1,13 +1,11 @@
 package my.app.dao;
 
-import my.app.models.Person;
+import my.app.models.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,34 +13,34 @@ import java.util.List;
 @Repository
 
 
-public class PersonDAOImp implements PersonDAO {
+public class UserDAOImp implements UserDAO {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public List<Person> listAllPeople() {
-        return entityManager.createQuery("from Person", Person.class
+    public List<User> listAllPeople() {
+        return entityManager.createQuery("from User", User.class
         ).getResultList();
     }
 
     @Override
-    public Person getUserById(int id) {
-        TypedQuery<Person> q = entityManager.createQuery(
-                "select person from Person person where person.id = :id", Person.class
+    public User getUserById(int id) {
+        TypedQuery<User> q = entityManager.createQuery(
+                "select user from User user where user.id = :id", User.class
         );
         q.setParameter("id", id);
         return q.getResultList().stream().findAny().orElse(null);
     }
 
     @Override
-    public void save(Person person) {
-        entityManager.persist(person);
+    public void save(User user) {
+        entityManager.persist(user);
 
     }
 
     @Override
-    public void update(int id, Person updatedPerson) {
-        entityManager.merge(updatedPerson);
+    public void update(int id, User updatedUser) {
+        entityManager.merge(updatedUser);
     }
 
     @Override
