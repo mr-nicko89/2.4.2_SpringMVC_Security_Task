@@ -1,5 +1,7 @@
 package my.app.models;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -10,7 +12,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Table(name = "people")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue
     @Column(name = "id")
@@ -33,6 +35,10 @@ public class User {
     @NotEmpty
     @Column(name ="password")
     private String password;
+
+    @NotEmpty
+    @Column(name="role")
+    private String role;
 
     public User() {
 

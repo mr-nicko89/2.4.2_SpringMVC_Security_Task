@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,10 +23,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "name")
     String name;
 
-    public Role(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+
 
     public Role() {
 
