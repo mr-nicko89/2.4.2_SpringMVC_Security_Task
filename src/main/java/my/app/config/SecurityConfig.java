@@ -1,5 +1,6 @@
 package my.app.config;
 
+import my.app.config.handler.LoginHandler;
 import my.app.config.handler.LoginSuccessHandler;
 import my.app.models.Role;
 import my.app.service.UserService;
@@ -36,7 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем страницу с формой логина
                 .loginPage("/login")
                 //указываем логику обработки при логине
-                .successHandler(new LoginSuccessHandler())
+//                .successHandler(new LoginSuccessHandler())
+                .successHandler(new LoginHandler())
+
                 // указываем action с формы логина
                 .loginProcessingUrl("/login")
                 // Указываем параметры логина и пароля с формы логина
