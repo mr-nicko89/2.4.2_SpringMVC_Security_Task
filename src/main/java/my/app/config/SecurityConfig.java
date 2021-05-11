@@ -1,8 +1,9 @@
 package my.app.config;
 
 import my.app.config.handler.LoginSuccessHandler;
-import my.app.models.Permission;
 import my.app.models.Role;
+import my.app.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -22,10 +23,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
-//    }
+    private UserService userService;
+
+    @Autowired
+    public SecurityConfig(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -63,38 +66,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // защищенные URL
 //                .antMatchers("/people").access("hasAnyRole('ADMIN')").anyRequest().authenticated(); //было в 2.4.2 Example
 //                Доступ на основе ролей
-//                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-//                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole(Role.ADMIN.name())
-//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole(Role.ADMIN.name())
+                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
 //Доступ на основе permission
-                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.USER_READ.getPermission())
-                .antMatchers(HttpMethod.POST, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
-                .antMatchers(HttpMethod.DELETE, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
+//                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.USER_READ.getPermission())
+//                .antMatchers(HttpMethod.POST, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
+//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
 
                 .anyRequest()
                 .authenticated();
     }
 
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-                User.builder()
-                        .username("admin")
-                        .password(passwordEncoder().encode("admin"))
-//                        .roles(Role.ADMIN.name())
-//                        .authorities(Role.ADMIN.getAuthorities())
-                        .authorities(new Role(0,"ADMIN"))
-                        .build(),
-                User.builder()
-                        .username("user")
-                        .password(passwordEncoder().encode("user"))
-//                        .roles(Role.USER.name())
-//                        .authorities(Role.USER.getAuthorities())
-                        .authorities(new Role(1,"USER"))
-                        .build()
-        );
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

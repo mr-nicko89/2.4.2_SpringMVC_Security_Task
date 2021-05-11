@@ -24,7 +24,7 @@ public class UserDAOImp implements UserDAO {
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(Long id) {
         TypedQuery<User> q = entityManager.createQuery(
                 "select user from User user where user.id = :id", User.class
         );
@@ -39,12 +39,12 @@ public class UserDAOImp implements UserDAO {
     }
 
     @Override
-    public void update(int id, User updatedUser) {
+    public void update(Long id, User updatedUser) {
         entityManager.merge(updatedUser);
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
         entityManager.remove(getUserById(id));
     }
 

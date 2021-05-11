@@ -12,3 +12,7 @@
 https://java-master.com/spring-mvs-настройка-без-xml-web-xml/
 https://habr.com/ru/post/222579/
 https://www.baeldung.com/the-persistence-layer-with-spring-and-jpa
+
+
+****
+Связь один ко многим https://javastudy.ru/hibernate/hibernate-one-to-many/

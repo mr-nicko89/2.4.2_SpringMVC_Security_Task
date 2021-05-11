@@ -1,14 +1,12 @@
 package my.app.models;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "roles")
@@ -16,46 +14,82 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    int id;
+    Long id;
 
     @NotEmpty(message = "Name should not be empty")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
-    @Column(name = "name")
+    @Column(name = "role", unique = true, nullable = false)
     String name;
 
+    @ManyToMany(mappedBy = "roleSet")
+    private Set<User> userSet = new HashSet<>();
 
+    public Set<User> getUserSet() {
+        return userSet;
+    }
+
+    public void setUserSet(Set<User> userSet) {
+        this.userSet = userSet;
+    }
 
     public Role() {
+    }
 
+    public Role(Long id) {
+        this.id = id;
+    }
+
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Long getRole_id() {
+        return id;
+    }
+
+    public void setRole_id(Long role_id) {
+        this.id = role_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Role role = (Role) o;
+        return id.equals(role.id);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 7;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     @Override
     public String getAuthority() {
-        return name;
+        return getName();
     }
-
-    public void setAuthority(String name) {
-        this.name = name;
-    }
-
-    //    USER(Set.of(Permission.USER_READ)),
-//    ADMIN(Set.of(Permission.USER_READ, Permission.USER_WRITE));
-
-//    private final Set<Permission> permissions;
-//
-//    Role(Set<Permission> permissions) {
-//        this.permissions = permissions;
-//    }
-//
-//    public Set<Permission> getPermissions() {
-//        return permissions;
-//    }
-//
-//    public Set<SimpleGrantedAuthority> getAuthorities() {
-//        return getPermissions().stream()
-//                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
-//                .collect(Collectors.toSet());
-//    }
 }
+
 
 
