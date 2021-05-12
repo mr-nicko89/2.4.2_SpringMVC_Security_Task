@@ -48,5 +48,13 @@ public class UserDAOImp implements UserDAO {
         entityManager.remove(getUserById(id));
     }
 
+    @Override
+    public User getUserByName(String name) {
+        return entityManager.createQuery("SELECT u FROM User u WHERE u.name = :userName", User.class)
+                .setParameter("userName", name)
+                .setMaxResults(1)
+                .getSingleResult();
+    }
+
 }
 

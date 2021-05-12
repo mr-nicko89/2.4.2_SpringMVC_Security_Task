@@ -4,6 +4,8 @@ import my.app.dao.UserDAO;
 import my.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 //import javax.transaction.Transactional;
@@ -20,7 +22,7 @@ public class UserServiceImp implements UserService {
     private UserDAO userDao;
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
         return userDao.listAllPeople();
     }
 
@@ -30,18 +32,26 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public void save(User user) {
+    public void addUser(User user) {
         userDao.save(user);
     }
 
     @Override
-    public void update(Long id, User updatedUser) {
+    public void updateUser(Long id, User updatedUser) {
         userDao.update(id, updatedUser);
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteUser(Long id) {
         userDao.delete(id);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userDao.getUserByName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
+    }
 }

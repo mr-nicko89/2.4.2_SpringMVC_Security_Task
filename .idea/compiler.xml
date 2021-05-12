@@ -6,7 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="2.3.1_create_CRUD_application" />
         <module name="2.4.2_SpringMVC_Security_Task" />
       </profile>
     </annotationProcessing>

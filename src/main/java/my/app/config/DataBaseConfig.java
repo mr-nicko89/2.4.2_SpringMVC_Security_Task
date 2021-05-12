@@ -26,18 +26,17 @@ import javax.sql.DataSource;
 
 public class DataBaseConfig {
 
-     @Resource
-     private Environment env;
+    @Resource
+    private Environment env;
 
 
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-        dataSource.setDriverClassName(env.getProperty("db.driver"));
-        dataSource.setUrl(env.getProperty("db.url"));
-        dataSource.setUsername(env.getProperty("db.username"));
-        dataSource.setPassword(env.getProperty("db.password"));
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/spring_peoplebase?verifyServerCertificate=false&useSSL=false&requireSSL=false&useLegacyDatetimeCode=false&amp&serverTimezone=UTC");
+        dataSource.setUsername("root1");
+        dataSource.setPassword("12345_Aa");
         return dataSource;
     }
 
@@ -45,9 +44,9 @@ public class DataBaseConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setGenerateDdl(Boolean.parseBoolean(env.getProperty("hibernate.hbm2ddl.auto")));
-        vendorAdapter.setDatabasePlatform(env.getProperty("hibernate.dialect"));
-        vendorAdapter.setShowSql(Boolean.parseBoolean(env.getProperty("hibernate.show_sql")));
+        vendorAdapter.setGenerateDdl(true);
+        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL8Dialect");
+        vendorAdapter.setShowSql(true);
         LocalContainerEntityManagerFactoryBean factory =
                 new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
@@ -64,3 +63,41 @@ public class DataBaseConfig {
         return txManager;
     }
 }
+//     @Resource
+//     private Environment env;
+//
+//
+//    @Bean
+//    public DataSource dataSource() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//
+//        dataSource.setDriverClassName(env.getProperty("db.driver"));
+//        dataSource.setUrl(env.getProperty("db.url"));
+//        dataSource.setUsername(env.getProperty("db.username"));
+//        dataSource.setPassword(env.getProperty("db.password"));
+//        return dataSource;
+//    }
+//
+//
+//    @Bean
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+//        vendorAdapter.setGenerateDdl(Boolean.parseBoolean(env.getProperty("hibernate.hbm2ddl.auto")));
+//        vendorAdapter.setDatabasePlatform(env.getProperty("hibernate.dialect"));
+//        vendorAdapter.setShowSql(Boolean.parseBoolean(env.getProperty("hibernate.show_sql")));
+//        LocalContainerEntityManagerFactoryBean factory =
+//                new LocalContainerEntityManagerFactoryBean();
+//        factory.setJpaVendorAdapter(vendorAdapter);
+//        factory.setDataSource(dataSource());
+//        factory.setPackagesToScan(new String[]{"my.app.models"});
+//        return factory;
+//    }
+//
+//
+//    @Bean
+//    public PlatformTransactionManager transactionManager() {
+//        JpaTransactionManager txManager = new JpaTransactionManager();
+//        txManager.setEntityManagerFactory(entityManagerFactory().getObject());
+//        return txManager;
+//    }
+//}

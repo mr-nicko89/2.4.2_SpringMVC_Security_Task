@@ -1,17 +1,19 @@
 package my.app.service;
 
 import my.app.models.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
-    List<User> getAll();
+public interface UserService extends UserDetailsService {
+    void addUser(User user);
+
+    List<User> getAllUsers();
+
+    void deleteUser(Long id);
+
+    void updateUser(Long id, User updatedUser);
 
     User getUserById(Long id);
 
-    void save(User user);
-
-    void update(Long id, User updatedUser);
-
-    public void delete(Long id);
 }

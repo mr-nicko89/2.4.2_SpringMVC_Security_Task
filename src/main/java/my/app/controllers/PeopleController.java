@@ -51,7 +51,7 @@ public class PeopleController {
 //    @RequestMapping("/people")
     @GetMapping("/people")
     public String index(Model model) {
-        model.addAttribute("people", userService.getAll());
+        model.addAttribute("people", userService.getAllUsers());
         return "people/index";
     }
 
@@ -72,7 +72,7 @@ public class PeopleController {
         if (bindingResult.hasErrors())
             return "people/new";
 
-        userService.save(user);
+        userService.addUser(user);
         return "redirect:/people";
     }
 
@@ -88,13 +88,13 @@ public class PeopleController {
         if (bindingResult.hasErrors())
             return "people/edit";
 
-        userService.update(id, user);
+        userService.updateUser(id, user);
         return "redirect:/people";
     }
 
     @DeleteMapping("/people/{id}")
     public String delete(@PathVariable("id") Long id) {
-        userService.delete(id);
+        userService.deleteUser(id);
         return "redirect:/people";
     }
 
