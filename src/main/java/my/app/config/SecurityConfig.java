@@ -1,8 +1,6 @@
 package my.app.config;
 
-import my.app.config.handler.LoginHandler;
 import my.app.config.handler.LoginSuccessHandler;
-import my.app.models.Role;
 import my.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 //указываем логику обработки при логине
 //                .successHandler(new LoginSuccessHandler())
-                .successHandler(new LoginHandler())
+                .successHandler(new LoginSuccessHandler())
 
                 // указываем action с формы логина
                 .loginProcessingUrl("/login")
