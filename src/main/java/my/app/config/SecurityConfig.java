@@ -64,9 +64,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // защищенные URL
 //                .antMatchers("/people").access("hasAnyRole('ADMIN')").anyRequest().authenticated(); //было в 2.4.2 Example
 //                Доступ на основе ролей
-                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
+
+                .antMatchers("/hello").access("hasAnyRole('ADMIN')")
+//                .antMatchers("/people/**").permitAll()
+
+//                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
+//                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
+//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
+
+//                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
+//                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
+//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
+
 //Доступ на основе permission
 //                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.USER_READ.getPermission())
 //                .antMatchers(HttpMethod.POST, "/people/**").hasAuthority(Permission.USER_WRITE.getPermission())
