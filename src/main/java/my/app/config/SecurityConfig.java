@@ -16,7 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //Содержание полностью скопировано из 2.4.2_Example
 //Аутентификация inMemory
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserService userService;
@@ -32,7 +32,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем страницу с формой логина
                 .loginPage("/login")
                 //указываем логику обработки при логине
-//                .successHandler(new LoginSuccessHandler())
                 .successHandler(new LoginSuccessHandler())
 
                 // указываем action с формы логина
@@ -65,16 +64,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/people").access("hasAnyRole('ADMIN')").anyRequest().authenticated(); //было в 2.4.2 Example
 //                Доступ на основе ролей
 
-                .antMatchers("/hello").access("hasAnyRole('ADMIN')")
+//                .antMatchers("/hello").access("hasAnyRole('ADMIN')")
+                .antMatchers("/people/").authenticated()
+//                .antMatchers("/people/new").hasRole("ADMIN")
+//                .antMatchers("/people/new").hasAuthority( "ADMIN")
 //                .antMatchers("/people/**").permitAll()
 
 //                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
-//                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
-
-//                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
-//                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/people/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
 
 //Доступ на основе permission
 //                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.USER_READ.getPermission())
@@ -91,3 +90,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 }
+

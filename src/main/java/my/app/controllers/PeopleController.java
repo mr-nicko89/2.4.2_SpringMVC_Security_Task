@@ -3,6 +3,8 @@ package my.app.controllers;
 import my.app.models.User;
 import my.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,7 @@ import java.util.List;
 public class PeopleController {
 
     private final UserService userService;
+
 
     @Autowired
     public PeopleController(UserService userService)
@@ -30,9 +34,16 @@ public class PeopleController {
     //Из 2.4.2_Example
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
-    public String printWelcome(ModelMap model) {
+    public String printWelcome(Principal principal, ModelMap model) {
+// чтобы посмотреть аутентифицированного пользователя через дебаггер
+        String str = "You are anonymous";
+        if (principal != null) {
+            Authentication a = SecurityContextHolder.getContext().getAuthentication();
+            str = "You are logged in as a user: " + principal.getName();
+        }
         List<String> messages = new ArrayList<>();
         messages.add("Hello!");
+        messages.add(str);
         messages.add("I'm Spring MVC-SECURITY application");
         messages.add("5.2.0 version by sep'19 ");
         model.addAttribute("messages", messages);
@@ -43,8 +54,6 @@ public class PeopleController {
     public String loginPage() {
         return "login";
     }
-
-
 
 
     //Из 2.3.1

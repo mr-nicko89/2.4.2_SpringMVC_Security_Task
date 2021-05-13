@@ -5,6 +5,7 @@
     <title>Index</title>
 </head>
 <body>
+<!--<p th:text="'Authenticated user: ' + ${user.getName()}">VALUE</p>-->
 
 <div th:each="user : ${people}">
     <a th:href="@{/people/{id}(id=${user.getId()})}"
