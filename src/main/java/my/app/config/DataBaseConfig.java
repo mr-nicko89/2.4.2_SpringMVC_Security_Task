@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@PropertySource("classpath:db.properties")
+//@PropertySource("classpath:db.properties")
 @EnableJpaRepositories("my.app.config")
 @EnableTransactionManagement
 @ComponentScan(basePackages = "my.app.config")

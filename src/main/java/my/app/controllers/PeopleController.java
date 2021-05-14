@@ -102,6 +102,7 @@ public class PeopleController {
     }
 
     @DeleteMapping("/people/{id}")
+//    @RequestMapping(value = "/people/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/people";
