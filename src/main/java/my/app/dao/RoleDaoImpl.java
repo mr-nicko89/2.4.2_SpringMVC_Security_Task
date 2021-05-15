@@ -13,6 +13,7 @@ import java.util.Set;
 public class RoleDaoImpl implements RoleDao {
 
     final private String defaultRoleName = "ROLE_USER";
+    final private String adminRoleName = "ROLE_ADMIN";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -36,6 +37,11 @@ public class RoleDaoImpl implements RoleDao {
                 .setParameter("roleName", name)
                 .setMaxResults(1)
                 .getSingleResult();
+    }
+
+    @Override
+    public Role getAdminRole() {
+         return getRoleByName(adminRoleName);
     }
 
 }

@@ -66,15 +66,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                Доступ на основе ролей
 
 //                .antMatchers("/hello").access("hasAnyRole('ADMIN')")
-                .antMatchers("/people/").authenticated()
-//                .antMatchers("/people/new").hasRole("ADMIN")
-//                .antMatchers("/people/new").hasAuthority( "ADMIN")
-//                .antMatchers("/people/**").permitAll()
 
-//                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.GET, "/people/**").authenticated()
+/*                .antMatchers("/people").hasAnyRole("ADMIN")
+                .antMatchers("/people/new").hasAnyRole("ADMIN")
+                .antMatchers("/people/{id}").hasAnyRole("ADMIN", "USER")
+
+                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")*/
+
+                .antMatchers("/people").permitAll()
+                .antMatchers("/people/new").permitAll()
+                .antMatchers("/people/{id}").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/people/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/people/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/people/**").permitAll()
 
 //Доступ на основе permission
 //                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.USER_READ.getPermission())

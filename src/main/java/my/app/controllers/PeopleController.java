@@ -1,6 +1,7 @@
 package my.app.controllers;
 
 import my.app.models.User;
+import my.app.service.RoleService;
 import my.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,14 +23,14 @@ import java.util.List;
 public class PeopleController {
 
     private final UserService userService;
-
+    private RoleService roleService;
 
     @Autowired
-    public PeopleController(UserService userService)
-    //public PeopleController(JpaUserDAOImp userDAO)
-    {
+    public PeopleController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
     }
+
 
     //Из 2.4.2_Example
 
@@ -76,12 +77,18 @@ public class PeopleController {
     }
 
     @PostMapping("/people")
-    public String create(@ModelAttribute("user") @Valid User user,
+    public String create(@ModelAttribute("user") @Valid User user,@ModelAttribute("adminId") String adminId,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "people/new";
 
+        if (adminId.isEmpty()) {
+            user.getRoleSet().add(roleService.getDefaultRole());
+        }else {
+            user.getRoleSet().add(roleService.getAdminRole());
+        }
         userService.addUser(user);
+//        model.addAttribute("userData", userService.getAllUsers());
         return "redirect:/people";
     }
 

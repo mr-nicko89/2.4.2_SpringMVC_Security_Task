@@ -23,6 +23,10 @@
     <input type="text" th:field="*{password}" id="password"/>
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
     <br/>
+    <label for="adminId">Set role admin: </label>
+    <input type=checkbox id=adminId name=adminId value="ROLE_ADMIN">
+
+    <br/>
     <input type="submit" value="Create!"/>
 </form>
 

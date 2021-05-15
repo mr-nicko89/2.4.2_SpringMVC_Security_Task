@@ -9,4 +9,6 @@ public interface RoleService {
     Set<Role> getRoleSet(Set<String> roles);
 
     Role getDefaultRole();
+
+    Role getAdminRole();
 }
