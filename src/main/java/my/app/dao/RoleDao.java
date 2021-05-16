@@ -12,4 +12,8 @@ public interface RoleDao {
     Role getRoleByName(String name);
 
     Role getAdminRole();
+
+    void setAdminRoleDefault();
+
+    void setUserRoleDefault();
 }

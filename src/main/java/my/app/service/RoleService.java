@@ -11,4 +11,6 @@ public interface RoleService {
     Role getDefaultRole();
 
     Role getAdminRole();
+
+    void setRolesDefault();
 }

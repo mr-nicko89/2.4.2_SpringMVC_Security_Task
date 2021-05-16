@@ -44,4 +44,22 @@ public class RoleDaoImpl implements RoleDao {
          return getRoleByName(adminRoleName);
     }
 
+    @Override
+    public void setAdminRoleDefault() {
+
+        Role adminRole = new Role();
+        adminRole.setName("ROLE_ADMIN");
+        entityManager.persist(adminRole);
+
+
+    }
+
+    @Override
+    public void setUserRoleDefault() {
+        Role userRole = new Role();
+        userRole.setName("ROLE_USER");
+        entityManager.persist(userRole);
+    }
+
+
 }

@@ -34,4 +34,9 @@ public class RoleServiceImpl implements RoleService {
         return roleDao.getAdminRole();
     }
 
+    @Override
+    public void setRolesDefault() {
+        roleDao.setAdminRoleDefault();
+        roleDao.setUserRoleDefault();
+    }
 }

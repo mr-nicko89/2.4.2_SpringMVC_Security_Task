@@ -29,6 +29,8 @@ public class PeopleController {
     public PeopleController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
+
+
     }
 
 
@@ -77,14 +79,14 @@ public class PeopleController {
     }
 
     @PostMapping("/people")
-    public String create(@ModelAttribute("user") @Valid User user,@ModelAttribute("adminId") String adminId,
+    public String create(@ModelAttribute("user") @Valid User user, @ModelAttribute("adminId") String adminId,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "people/new";
 
         if (adminId.isEmpty()) {
             user.getRoleSet().add(roleService.getDefaultRole());
-        }else {
+        } else {
             user.getRoleSet().add(roleService.getAdminRole());
         }
         userService.addUser(user);
@@ -120,4 +122,24 @@ public class PeopleController {
     public String pageForAuthenticatedUsers(Model model) {
         return "people/authenticated";
     }
+
+    //Создаем пользователей по умолчанию admin, user
+    @GetMapping("/people/creatDefaultUsers")
+    public String creatDefaultUsers() {
+
+        roleService.setRolesDefault();
+
+        User admin = new User();
+        admin.setAge(33);
+        admin.setEmail("admin@email.com");
+        admin.setName("admin");
+        admin.setPassword("admin");
+        admin.getRoleSet().add(roleService.getAdminRole());
+
+        userService.addUser(admin);
+
+        return "redirect:/people";
+    }
+
+
 }
