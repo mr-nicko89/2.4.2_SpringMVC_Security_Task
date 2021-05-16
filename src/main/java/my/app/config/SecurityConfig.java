@@ -78,6 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/people").permitAll()
                 .antMatchers("/people/new").permitAll()
                 .antMatchers("/people/{id}").permitAll()
+                .antMatchers("/creatDefaultUsers").permitAll()
+
 
                 .antMatchers(HttpMethod.GET, "/people/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/people/**").permitAll()

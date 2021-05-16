@@ -60,29 +60,28 @@ public class PeopleController {
 
 
     //Из 2.3.1
-//    @RequestMapping("/people")
-    @GetMapping("/people")
+    @GetMapping("/admin")
     public String index(Model model) {
         model.addAttribute("people", userService.getAllUsers());
-        return "people/index";
+        return "admin/index";
     }
 
-    @GetMapping("/people/{id}")
+    @GetMapping("/admin/{id}")
     public String showUserById(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "people/show";
+        return "admin/show";
     }
 
-    @GetMapping("/people/new")
+    @GetMapping("/admin/new")
     public String newUser(@ModelAttribute("user") User user) {
-        return "people/new";
+        return "admin/new";
     }
 
-    @PostMapping("/people")
+    @PostMapping("/admin")
     public String create(@ModelAttribute("user") @Valid User user, @ModelAttribute("adminId") String adminId,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "people/new";
+            return "admin/new";
 
         if (adminId.isEmpty()) {
             user.getRoleSet().add(roleService.getDefaultRole());
@@ -91,40 +90,40 @@ public class PeopleController {
         }
         userService.addUser(user);
 //        model.addAttribute("userData", userService.getAllUsers());
-        return "redirect:/people";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/people/{id}/edit")
+    @GetMapping("/admin/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.getUserById(id));
-        return "people/edit";
+        return "admin/edit";
     }
 
-    @PatchMapping("/people/{id}")
+    @PatchMapping("/admin/{id}")
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
                          @PathVariable("id") Long id) {
         if (bindingResult.hasErrors())
-            return "people/edit";
+            return "admin/edit";
 
         userService.updateUser(id, user);
-        return "redirect:/people";
+        return "redirect:/admin";
     }
 
-    @DeleteMapping("/people/{id}")
-//    @RequestMapping(value = "/people/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/admin/{id}")
+//    @RequestMapping(value = "/admin/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/people";
+        return "redirect:/admin";
     }
 
     //    Example
-    @GetMapping("/people/authenticated")
+    @GetMapping("/admin/authenticated")
     public String pageForAuthenticatedUsers(Model model) {
-        return "people/authenticated";
+        return "admin/authenticated";
     }
 
     //Создаем пользователей по умолчанию admin, user
-    @GetMapping("/people/creatDefaultUsers")
+    @GetMapping("/creatDefaultUsers")
     public String creatDefaultUsers() {
 
         roleService.setRolesDefault();
@@ -138,7 +137,7 @@ public class PeopleController {
 
         userService.addUser(admin);
 
-        return "redirect:/people";
+        return "redirect:/admin";
     }
 
 
