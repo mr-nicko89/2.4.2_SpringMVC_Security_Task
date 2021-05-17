@@ -64,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 // защищенные URL
 
-                .antMatchers("/user/**").authenticated()
+                .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
 
                 .antMatchers("/admin").hasAnyRole("ADMIN")
                 .antMatchers("/admin/new").hasAnyRole("ADMIN")
