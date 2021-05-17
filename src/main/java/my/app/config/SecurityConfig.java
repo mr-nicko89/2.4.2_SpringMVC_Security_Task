@@ -60,30 +60,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 .antMatchers("/hello").permitAll()
-
-                // защищенные URL
-//                .antMatchers("/people").access("hasAnyRole('ADMIN')").anyRequest().authenticated(); //было в 2.4.2 Example
-//                Доступ на основе ролей
-
-//                .antMatchers("/hello").access("hasAnyRole('ADMIN')")
-
-/*                .antMatchers("/people").hasAnyRole("ADMIN")
-                .antMatchers("/people/new").hasAnyRole("ADMIN")
-                .antMatchers("/people/{id}").hasAnyRole("ADMIN", "USER")
-
-                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")*/
-
-                .antMatchers("/people").permitAll()
-                .antMatchers("/people/new").permitAll()
-                .antMatchers("/people/{id}").permitAll()
                 .antMatchers("/creatDefaultUsers").permitAll()
 
+                // защищенные URL
 
-                .antMatchers(HttpMethod.GET, "/people/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/people/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/people/**").permitAll()
+                .antMatchers("/user/**").authenticated()
+
+                .antMatchers("/admin").hasAnyRole("ADMIN")
+                .antMatchers("/admin/new").hasAnyRole("ADMIN")
+                .antMatchers("/admin/{id}").hasAnyRole("ADMIN")
+
+                .antMatchers(HttpMethod.GET, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/people/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/people/**").hasAnyRole("ADMIN")
 
 //Доступ на основе permission
 //                .antMatchers(HttpMethod.GET, "/people/**").hasAuthority(Permission.USER_READ.getPermission())
