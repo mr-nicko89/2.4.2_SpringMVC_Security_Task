@@ -3,6 +3,7 @@ package my.app.service;
 import my.app.models.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
@@ -15,5 +16,5 @@ public interface UserService extends UserDetailsService {
     void updateUser(Long id, User updatedUser);
 
     User getUserById(Long id);
-
+    User loadUserByUsername(Principal principal);
 }

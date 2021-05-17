@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 //import javax.transaction.Transactional;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -54,4 +56,14 @@ public class UserServiceImp implements UserService {
         }
         return user;
     }
+
+    @Override
+    public User loadUserByUsername(Principal principal) throws UsernameNotFoundException {
+        User user = userDao.getUserByName(principal.getName());
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user;
+    }
+
 }

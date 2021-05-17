@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Persistence;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class PeopleController {
     }
 
     @GetMapping("/admin/{id}")
-    public String showUserById(@PathVariable("id") Long id, Model model) {
+    public String showUserByIdForAdmin(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "admin/show";
     }
@@ -138,6 +139,13 @@ public class PeopleController {
         userService.addUser(admin);
 
         return "redirect:/admin";
+    }
+
+    @GetMapping("/user/show")
+    public String showUserByIdForUser(Principal principal, Model model) {
+        User user = userService.loadUserByUsername(principal);
+        model.addAttribute("user", user);
+        return "user/showUser";
     }
 
 
