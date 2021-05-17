@@ -12,7 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.Persistence;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -35,7 +34,6 @@ public class PeopleController {
     }
 
 
-    //Из 2.4.2_Example
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     public String printWelcome(Principal principal, ModelMap model) {
@@ -90,7 +88,6 @@ public class PeopleController {
             user.getRoleSet().add(roleService.getAdminRole());
         }
         userService.addUser(user);
-//        model.addAttribute("userData", userService.getAllUsers());
         return "redirect:/admin";
     }
 
@@ -111,7 +108,6 @@ public class PeopleController {
     }
 
     @DeleteMapping("/admin/{id}")
-//    @RequestMapping(value = "/admin/{id}", method = RequestMethod.DELETE)
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";

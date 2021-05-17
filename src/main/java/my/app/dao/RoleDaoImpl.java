@@ -41,7 +41,7 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role getAdminRole() {
-         return getRoleByName(adminRoleName);
+        return getRoleByName(adminRoleName);
     }
 
     @Override
@@ -50,8 +50,6 @@ public class RoleDaoImpl implements RoleDao {
         Role adminRole = new Role();
         adminRole.setName("ROLE_ADMIN");
         entityManager.persist(adminRole);
-
-
     }
 
     @Override
