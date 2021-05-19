@@ -29,11 +29,7 @@ public class PeopleController {
     public PeopleController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-
-
     }
-
-
 
     @RequestMapping(value = "hello", method = RequestMethod.GET)
     public String printWelcome(Principal principal, ModelMap model) {
@@ -78,14 +74,14 @@ public class PeopleController {
     }
 
     @PostMapping("/admin")
-    public String create(@ModelAttribute("user") @Valid User user, @ModelAttribute("adminId") String adminId,
+    public String create(@ModelAttribute("user") @Valid User user, @ModelAttribute("selectedRole") String selectedRole,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "admin/new";
 
-        if (adminId.isEmpty()) {
+        if (selectedRole.contains("ROLE_USER")) {
             user.getRoleSet().add(roleService.getDefaultRole());
-        } else {
+        } else if(selectedRole.contains("ROLE_ADMIN")) {
             user.getRoleSet().add(roleService.getAdminRole());
         }
         userService.addUser(user);
