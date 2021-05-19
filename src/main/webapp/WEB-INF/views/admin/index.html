@@ -11,6 +11,25 @@
     <a th:href="@{/admin/{id}(id=${user.getId()})}"
        th:text="${user.getName() + ', ' + user.getAge()}">user</a>
 </div>
+<br/>
+
+<table th:each="user : ${people}">
+    <tr>
+        <td th:text="${user.getName()}"> user</td>
+        <td th:text="${user.getAge()}"> userAge</td>
+        <td th:text="${user.getEmail()}"> userEmail</td>
+        <td th:text="${user.getPassword()}"> userPassword</td>
+        <td th:text="${user.getRoleSet()}"> userRoleSet</td>
+        <td><a th:href="@{/admin/{id}(id=${user.getId()})}"
+               th:text="Edit">user</a></td>
+<!--        Дописать метод делит-->
+        <td><a th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">userDelete</a></td>
+<!--        <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">-->
+<!--            <input type="submit" value="Delete"/>-->
+<!--        </form>-->
+    </tr>
+</table>
+
 
 <br/>
 <hr/>
