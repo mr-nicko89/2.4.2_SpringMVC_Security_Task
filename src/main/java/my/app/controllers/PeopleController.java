@@ -91,14 +91,21 @@ public class PeopleController {
     @GetMapping("/admin/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin/edit";
     }
 
     @PatchMapping("/admin/{id}")
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                         @PathVariable("id") Long id) {
+                         @PathVariable("id") Long id,@ModelAttribute("selectedRole") String selectedRole) {
         if (bindingResult.hasErrors())
             return "admin/edit";
+
+        if (selectedRole.contains("ROLE_USER")) {
+            user.getRoleSet().add(roleService.getDefaultRole());
+        } else if(selectedRole.contains("ROLE_ADMIN")) {
+            user.getRoleSet().add(roleService.getAdminRole());
+        }
 
         userService.updateUser(id, user);
         return "redirect:/admin";
