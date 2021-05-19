@@ -1,12 +1,14 @@
 package my.app.dao;
 
 import my.app.models.Role;
+import my.app.models.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -57,6 +59,12 @@ public class RoleDaoImpl implements RoleDao {
         Role userRole = new Role();
         userRole.setName("ROLE_USER");
         entityManager.persist(userRole);
+    }
+
+    @Override
+    public List<Role> listAllRoles() {
+        return  entityManager.createQuery("from Role", Role.class
+        ).getResultList();
     }
 
 

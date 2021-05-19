@@ -1,7 +1,9 @@
 package my.app.dao;
 
 import my.app.models.Role;
+import my.app.models.User;
 
+import java.util.List;
 import java.util.Set;
 
 public interface RoleDao {
@@ -16,4 +18,6 @@ public interface RoleDao {
     void setAdminRoleDefault();
 
     void setUserRoleDefault();
+
+    List<Role> listAllRoles();
 }

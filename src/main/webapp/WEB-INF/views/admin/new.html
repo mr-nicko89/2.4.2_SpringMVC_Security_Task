@@ -27,6 +27,11 @@
     <input type=checkbox id=adminId name=adminId value="ROLE_ADMIN">
 
     <br/>
+        <select>
+            <option th:each="role : ${roles}" th:value="${role}"
+                    th:text="${role}">role</option>
+        </select>
+    <br/>
     <input type="submit" value="Create!"/>
 </form>
 <br/>

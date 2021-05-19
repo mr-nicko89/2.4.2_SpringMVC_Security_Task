@@ -2,10 +2,12 @@ package my.app.service;
 
 import my.app.dao.RoleDao;
 import my.app.models.Role;
+import my.app.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -17,6 +19,11 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     public RoleServiceImpl(RoleDao roleDao) {
         this.roleDao = roleDao;
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleDao.listAllRoles();
     }
 
     @Override

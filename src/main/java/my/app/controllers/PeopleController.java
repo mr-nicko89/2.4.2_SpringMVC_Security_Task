@@ -72,7 +72,8 @@ public class PeopleController {
     }
 
     @GetMapping("/admin/new")
-    public String newUser(@ModelAttribute("user") User user) {
+    public String newUser(@ModelAttribute("user") User user,Model model) {
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin/new";
     }
 
