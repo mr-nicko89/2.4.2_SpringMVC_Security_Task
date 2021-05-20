@@ -61,14 +61,8 @@ public class PeopleController {
         return "admin/index";
     }
 
-    @GetMapping("/admin/{id}")
-    public String showUserByIdForAdmin(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "admin/show";
-    }
-
     @GetMapping("/admin/new")
-    public String newUser(@ModelAttribute("user") User user,Model model) {
+    public String newUser(@ModelAttribute("user") User user, Model model) {
         model.addAttribute("roles", roleService.getAllRoles());
         return "admin/new";
     }
@@ -81,7 +75,7 @@ public class PeopleController {
 
         if (selectedRole.contains("ROLE_USER")) {
             user.getRoleSet().add(roleService.getDefaultRole());
-        } else if(selectedRole.contains("ROLE_ADMIN")) {
+        } else if (selectedRole.contains("ROLE_ADMIN")) {
             user.getRoleSet().add(roleService.getAdminRole());
         }
         userService.addUser(user);
@@ -97,13 +91,13 @@ public class PeopleController {
 
     @PatchMapping("/admin/{id}")
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                         @PathVariable("id") Long id,@ModelAttribute("selectedRole") String selectedRole) {
+                         @PathVariable("id") Long id, @ModelAttribute("selectedRole") String selectedRole) {
         if (bindingResult.hasErrors())
             return "admin/edit";
 
         if (selectedRole.contains("ROLE_USER")) {
             user.getRoleSet().add(roleService.getDefaultRole());
-        } else if(selectedRole.contains("ROLE_ADMIN")) {
+        } else if (selectedRole.contains("ROLE_ADMIN")) {
             user.getRoleSet().add(roleService.getAdminRole());
         }
 
@@ -115,12 +109,6 @@ public class PeopleController {
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/admin";
-    }
-
-    //    Example
-    @GetMapping("/admin/authenticated")
-    public String pageForAuthenticatedUsers(Model model) {
-        return "admin/authenticated";
     }
 
     //Создаем пользователей по умолчанию admin, user
