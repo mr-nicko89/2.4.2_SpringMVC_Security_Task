@@ -53,6 +53,5 @@ public class UserDAOImp implements UserDAO {
                 .setMaxResults(1)
                 .getSingleResult();
     }
-
 }
 

@@ -17,7 +17,6 @@ import java.util.List;
 @Transactional()
 public class UserServiceImp implements UserService {
 
-
     @Qualifier("userDAOImp")
     @Autowired
     private UserDAO userDao;
@@ -64,5 +63,4 @@ public class UserServiceImp implements UserService {
         }
         return user;
     }
-
 }

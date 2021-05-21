@@ -1,7 +1,6 @@
 package my.app.dao;
 
 import my.app.models.Role;
-import my.app.models.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +65,4 @@ public class RoleDaoImpl implements RoleDao {
         return  entityManager.createQuery("from Role", Role.class
         ).getResultList();
     }
-
-
 }

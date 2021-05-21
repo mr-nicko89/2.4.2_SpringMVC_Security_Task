@@ -7,7 +7,6 @@
 <body>
 <table style="border: 1px solid grey;
               width: 600px"
-
        th:each="user : ${people}">
     <tr>
         <td style="width: 84px" th:text="${user.getName()}"> user</td>
@@ -24,11 +23,8 @@
         </td>
     </tr>
 </table>
-
-
 <br/>
 <hr/>
-
 <a href="/admin/new">Create new user</a>
 <br/>
 <a href="/admin/creatDefaultUsers">Create creatDefaultUsers</a>
@@ -37,6 +33,5 @@
 <a href="/hello">hello</a>
 <br/>
 <a href="/logout">Logout</a>
-
 </body>
 </html>

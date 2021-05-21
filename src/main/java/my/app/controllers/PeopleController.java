@@ -1,11 +1,9 @@
 package my.app.controllers;
 
-import my.app.models.Role;
 import my.app.models.User;
 import my.app.service.RoleService;
 import my.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,8 +16,6 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 
 @Controller
@@ -73,7 +69,6 @@ public class PeopleController {
 
     @PostMapping("/admin")
     public String create(@ModelAttribute("user") @Valid User user, @RequestParam("selectedRole") String[] selectedRole,
-//    public String create(@ModelAttribute("user") @Valid User user,
                          BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors())
             return "admin/new";
@@ -144,6 +139,4 @@ public class PeopleController {
         model.addAttribute("user", user);
         return "user/showUser";
     }
-
-
 }

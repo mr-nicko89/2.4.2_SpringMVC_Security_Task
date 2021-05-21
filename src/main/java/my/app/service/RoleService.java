@@ -1,7 +1,6 @@
 package my.app.service;
 
 import my.app.models.Role;
-import my.app.models.User;
 
 import java.util.List;
 import java.util.Set;
