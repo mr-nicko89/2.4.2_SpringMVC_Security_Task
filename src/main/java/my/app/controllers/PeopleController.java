@@ -1,5 +1,6 @@
 package my.app.controllers;
 
+import my.app.models.Role;
 import my.app.models.User;
 import my.app.service.RoleService;
 import my.app.service.UserService;
@@ -18,6 +19,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Controller
@@ -70,7 +72,8 @@ public class PeopleController {
     }
 
     @PostMapping("/admin")
-    public String create(@ModelAttribute("user") @Valid User user,  @ModelAttribute("selectedRole[]") String[] selectedRole,
+    public String create(@ModelAttribute("user") @Valid User user, @RequestParam("selectedRole") String[] selectedRole,
+//    public String create(@ModelAttribute("user") @Valid User user,
                          BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors())
             return "admin/new";
@@ -96,16 +99,17 @@ public class PeopleController {
 
     @PatchMapping("/admin/{id}")
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
-                         @PathVariable("id") Long id, @ModelAttribute("selectedRole") String selectedRole) {
+                         @PathVariable("id") Long id, @RequestParam("selectedRole") String[] selectedRole) {
         if (bindingResult.hasErrors())
             return "admin/edit";
 
-        if (selectedRole.contains("ROLE_USER")) {
-            user.getRoleSet().add(roleService.getDefaultRole());
-        } else if (selectedRole.contains("ROLE_ADMIN")) {
-            user.getRoleSet().add(roleService.getAdminRole());
+        for (String role : selectedRole) {
+            if (role.contains("ROLE_USER")) {
+                user.getRoleSet().add(roleService.getDefaultRole());
+            } else if (role.contains("ROLE_ADMIN")) {
+                user.getRoleSet().add(roleService.getAdminRole());
+            }
         }
-
         userService.updateUser(id, user);
         return "redirect:/admin";
     }
