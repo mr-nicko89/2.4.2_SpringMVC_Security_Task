@@ -4,6 +4,7 @@ import my.app.models.User;
 import my.app.service.RoleService;
 import my.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -68,15 +70,18 @@ public class PeopleController {
     }
 
     @PostMapping("/admin")
-    public String create(@ModelAttribute("user") @Valid User user, @ModelAttribute("selectedRole") String selectedRole,
-                         BindingResult bindingResult) {
+    public String create(@ModelAttribute("user") @Valid User user,  @ModelAttribute("selectedRole[]") String[] selectedRole,
+                         BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors())
             return "admin/new";
 
-        if (selectedRole.contains("ROLE_USER")) {
-            user.getRoleSet().add(roleService.getDefaultRole());
-        } else if (selectedRole.contains("ROLE_ADMIN")) {
-            user.getRoleSet().add(roleService.getAdminRole());
+        for (String role : selectedRole
+        ) {
+            if (role.contains("ROLE_USER")) {
+                user.getRoleSet().add(roleService.getDefaultRole());
+            } else if (role.contains("ROLE_ADMIN")) {
+                user.getRoleSet().add(roleService.getAdminRole());
+            }
         }
         userService.addUser(user);
         return "redirect:/admin";
